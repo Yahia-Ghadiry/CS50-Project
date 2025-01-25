@@ -1,23 +1,56 @@
 # Bandwidth Analyzer
-#### Video Demo:  https://www.youtube.com/watch?v=cpV7uTdiLvQ
-#### Description:
 
-This addon tracks bandwidth usage, which is most helpful to those who live in internet-capped countries.
+## Video Demo
 
-It uses the webRequest API to get request and response information such as Source, request/response size, etc.. 
+[Watch the Video Demo](https://www.youtube.com/watch?v=cpV7uTdiLvQ)
 
-after that, it is formatted so the URL becomes the domain and the date is better adjusted for easy identification.
-and the date is then formated into a string consisting of the: year, month, weekday, day of the month, and hour. There are 6 different variables each having one less date at the end. this is to help with the next step.
+## Description
 
-I have decided to use 6 "tables" each for the interval so that it is much faster to pull up data for say one year by just looking at the year table than going through the hour table and summing all the values each time it is needed for access although this approach uses much more storage it saves on runtime in the long run. 
+The Bandwidth Analyzer is a browser add-on designed to track and analyze bandwidth usage. This tool is particularly useful for users in countries with internet data caps, as it provides detailed insights into data consumption.
 
-then for the pop-up, it gets a record of the usage data for the month and displays it based on the per cent of usage of the higher; past or this month while in the day it gets the average of the previous 30 consecutive days and displays it based on a per cent of highest daily usage one as the 100. There is a button to open a more detailed tab.
+### Key Features
 
-The detailed tab displays usage categorized by the top 3 domains or shows Total Usage in a given time interval.
-the function getChartData() should be complete so only adjusting parameters and all data necessary to get the chart should be generated 
-the first argument that is passed it should be the database store object reference it is used  to know which database to use, the second one is the format type of the chart's x-axis labels it should be almost always the same as the store name but in one where it is needed to get day labels by day of the week it may be different, next is the number of bars that will be shown say for a week that will be seven, next it is chosen what should the graph represent, for now, there are two options "total" which shows the total usage for the given period and there is "detailed" which shows data based on top 3 websites used although there is room for a third which is an uploaded/downloaded graph I have decided against it for as I think total and detailed would be the most useful, lastly there is an offset for date if for say you want to see all the usage of previous week.
+- **Bandwidth Tracking**: Utilizes the `webRequest` API to capture request and response details, including source URLs, request sizes, and response sizes.
+- **Data Formatting**: Formats URLs into domains and adjusts dates for easier identification. Dates are converted into strings that include the year, month, weekday, day of the month, and hour.
+- **Efficient Data Storage**: Employs six different "tables" to store data at various intervals (year, month, weekday, day of the month, and hour). This approach optimizes data retrieval speed by reducing the need to sum values from smaller intervals.
+- **Usage Visualization**:
+  - **Popup Display**: Shows monthly usage data, comparing current and past months, and daily usage based on the average of the previous 30 days.
+  - **Detailed Tab**: Provides a comprehensive view of usage data, categorized by the top 3 domains or total usage within a specified time interval.
+- **Customizable Charts**: The `getChartData()` function generates chart data based on specified parameters, allowing for flexible visualization of bandwidth usage.
 
-Important remarks:
-Although all features listed are working (unless specified) for getChartData parameters are changed manually from code and currently has no other way to show them.
+### Technical Details
 
-Apis used are Chart.js and Dexi.js but chart.js wasn't used for the popup also most of the popup button to open detail style was take from a website specified in it's style sheet , also the icon was obtained from a free png website
+- **APIs Used**:
+  - **Chart.js**: For rendering detailed charts in the detailed tab.
+  - **Dexie.js**: For efficient data storage and retrieval.
+- **Data Storage**: The add-on uses a multi-table approach to store bandwidth data, ensuring quick access to aggregated data while maintaining detailed records for more granular analysis.
+- **Customization**: The `getChartData()` function is highly customizable, allowing users to specify the time interval, data type (total or detailed), and date offset for the charts.
+
+### Usage
+
+1. **Install the Add-on**: Add the Bandwidth Analyzer to your browser.
+2. **Monitor Usage**: The popup will display your current and past bandwidth usage.
+3. **View Detailed Reports**: Click the button in the popup to open the detailed tab, where you can see usage broken down by domain or total usage over time.
+4. **Customize Charts**: Adjust the parameters in the `getChartData()` function to generate custom charts based on your needs.
+
+### Important Notes
+
+- **Manual Parameter Adjustment**: Currently, the parameters for `getChartData()` need to be adjusted manually in the code. There is no user interface for changing these parameters at this time.
+- **Third-Party Resources**:
+  - The popup button style was adapted from an external website, credited in the stylesheet.
+  - The add-on icon was sourced from a free PNG website.
+
+### Future Enhancements
+
+- **User Interface for Chart Customization**: Plan to add a user interface for adjusting chart parameters without modifying the code.
+- **Upload/Download Graph**: Consider adding a third chart type to visualize upload vs. download data.
+
+## Credits
+
+- **Chart.js**: For chart rendering.
+- **Dexie.js**: For database management.
+- **External Resources**:
+  - Popup button style adapted from an external source.
+  - Icon sourced from a free PNG website.
+
+For any questions or contributions, please open an issue or submit a pull request. We welcome feedback and contributions to improve the Bandwidth Analyzer!
